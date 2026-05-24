@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>濠氱ぜ浠紡闂嵎 - 鐖辨儏鏁呬簨鏀堕泦</title>
+<style>
+  :root {
+    --primary: #d4a574;
+    --primary-dark: #b8864e;
+    --bg: #faf7f4;
+    --card: #ffffff;
+    --text: #3d322b;
+    --text-light: #8c7b6e;
+    --border: #e8ddd2;
+    --shadow: 0 2px 16px rgba(0,0,0,0.06);
+    --radius: 14px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    padding-bottom: 100px;
+  }
+
+  /* 椤堕儴瑁呴グ */
+  .header-decoration {
+    height: 6px;
+    background: linear-gradient(90deg, #d4a574, #e2c8a5, #d4a574);
+  }
+
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  /* 澶撮儴 */
+  .header {
+    text-align: center;
+    padding: 32px 0 24px;
+  }
+
+  .header .icon {
+    font-size: 48px;
+    margin-bottom: 8px;
+  }
+
+  .header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #5a3e2b;
+    letter-spacing: 1px;
+  }
+
+  .header .subtitle {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 6px;
+  }
+
+  /* 姝ラ鏉?*/
+  .progress-bar {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .progress-step {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .progress-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: var(--card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-light);
+    transition: all 0.3s;
+    flex-shrink: 0;
+  }
+
+  .progress-dot.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+  }
+
+  .progress-dot.done {
+    background: #c9b99a;
+    border-color: #c9b99a;
+    color: #fff;
+  }
+
+  .progress-line {
+    width: 40px;
+    height: 2px;
+    background: var(--border);
+    transition: background 0.3s;
+  }
+
+  .progress-line.done {
+    background: #c9b99a;
+  }
+
+  /* 姝ラ闈㈡澘 */
+  .step-panel {
+    display: none;
+    animation: fadeSlideIn 0.35s ease;
+  }
+
+  .step-panel.active {
+    display: block;
+  }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 鍗＄墖 */
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title .num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* 琛ㄥ崟鍏冪礌 */
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    background: #fefdfb;
+    color: var(--text);
+    transition: border-color 0.2s;
+    resize: vertical;
+  }
+
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(212,165,116,0.12);
+  }
+
+  textarea { min-height: 90px; }
+
+  .field-group {
+    margin-bottom: 16px;
+  }
+
+  .field-group:last-child { margin-bottom: 0; }
+
+  .hint {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  .row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* 澶氶€夊崱鐗?*/
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+    font-size: 14px;
+    background: #fefdfb;
+  }
+
+  .check-item:hover { border-color: #d4a574; }
+  .check-item.selected {
+    border-color: var(--primary);
+    background: #fdf5ec;
+  }
+
+  .check-item .checkbox-custom {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    font-size: 12px;
+    color: transparent;
+  }
+
+  .check-item.selected .checkbox-custom {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+  }
+
+  .check-item .emoji {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  /* 鎸夐挳 */
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+  }
+
+  .btn {
+    padding: 12px 32px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #d4a574, #c4905a);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(180,130,80,0.3);
+  }
+
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(180,130,80,0.4); }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-outline {
+    background: var(--card);
+    color: var(--text);
+    border: 1.5px solid var(--border);
+  }
+
+  .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+  /* 缁撴灉椤?*/
+  .result-block {
+    margin-bottom: 16px;
+  }
+
+  .result-block h3 {
+    font-size: 15px;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .result-block .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #fdf5ec;
+    color: #b07d44;
+    border-radius: 20px;
+    font-size: 13px;
+  }
+
+  .result-block p {
+    font-size: 14px;
+    white-space: pre-wrap;
+  }
+
+  .copy-bar {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .copy-bar .btn {
+    flex: 1;
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0.8);
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 14px;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translate(-50%,-50%) scale(1);
+  }
+
+  /* 搴曢儴 */
+  .footer-note {
+    text-align: center;
+    font-size: 12px;
+    color: #c4b8a8;
+    margin-top: 24px;
+  }
+
+  /* 绗笁涓楠や腑鐖辨儏鏁呬簨鐨勫紩瀵奸棶棰?*/
+  .guided-question {
+    margin-bottom: 14px;
+    padding: 10px 14px;
+    background: #fdf8f2;
+    border-radius: 10px;
+    border-left: 3px solid var(--primary);
+  }
+
+  .guided-question .q-text {
+    font-size: 13px;
+    color: #6b5a48;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+<div class="header-decoration"></div>
+
+<div class="container">
+
+  <!-- 澶撮儴 -->
+  <div class="header">
+    <div class="icon">馃拲</div>
+    <h1>濠氱ぜ浠紡闂嵎</h1>
+    <p class="subtitle">甯姪涓绘寔浜烘洿濂藉湴璁茶堪浣犱滑鐨勬晠浜?/p>
+  </div>
+
+  <!-- 姝ラ鏉?-->
+  <div class="progress-bar" id="progressBar">
+    <div class="progress-step">
+      <div class="progress-dot active" data-step="1">1</div>
+    </div>
+    <div class="progress-line" data-line="1"></div>
+    <div class="progress-step">
+      <div class="progress-dot" data-step="2">2</div>
+    </div>
+    <div class="progress-line" data-line="2"></div>
+    <div class="progress-step">
+      <div class="progress-dot" data-step="3">3</div>
+    </div>
+  </div>
+
+  <!-- ============ 姝ラ涓€锛氬熀鏈俊鎭?============ -->
+  <div class="step-panel active" id="step1">
+    <div class="card">
+      <div class="card-title"><span class="num">1</span> 鏂颁汉鍩烘湰淇℃伅</div>
+      <div class="row-2">
+        <div class="field-group">
+          <label>鏂伴儙濮撳悕</label>
+          <input type="text" id="groomName" placeholder="璇疯緭鍏ユ柊閮庡鍚?>
+        </div>
+        <div class="field-group">
+          <label>鏂板濮撳悕</label>
+          <input type="text" id="brideName" placeholder="璇疯緭鍏ユ柊濞樺鍚?>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="num">2</span> 濠氱ぜ淇℃伅</div>
+      <div class="row-2">
+        <div class="field-group">
+          <label>濠氱ぜ鏃ユ湡</label>
+          <input type="date" id="weddingDate">
+        </div>
+        <div class="field-group">
+          <label>濠氱ぜ鍦哄湴</label>
+          <input type="text" id="venue" placeholder="渚嬪锛歑X閰掑簵">
+        </div>
+      </div>
+      <div class="field-group">
+        <label>濠氱ぜ椋庢牸</label>
+        <div class="checklist" id="weddingStyle">
+          <div class="check-item" data-val="涓紡浼犵粺"><span class="emoji">馃彯</span> 涓紡浼犵粺</div>
+          <div class="check-item" data-val="瑗垮紡娴极"><span class="emoji">馃晩锔?/span> 瑗垮紡娴极</div>
+          <div class="check-item" data-val="鎴峰鑽夊潽"><span class="emoji">馃尶</span> 鎴峰鑽夊潽</div>
+          <div class="check-item" data-val="妫郴娓呮柊"><span class="emoji">馃尣</span> 妫郴娓呮柊</div>
+          <div class="check-item" data-val="澶嶅彜鏂囪壓"><span class="emoji">馃帪锔?/span> 澶嶅彜鏂囪壓</div>
+          <div class="check-item" data-val="绠€绾︾幇浠?><span class="emoji">鉁?/span> 绠€绾︾幇浠?/div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="nextStep()">涓嬩竴姝?鈫?/button>
+    </div>
+  </div>
+
+  <!-- ============ 姝ラ浜岋細浠紡娴佺▼閫夋嫨 ============ -->
+  <div class="step-panel" id="step2">
+    <div class="card">
+      <div class="card-title"><span class="num">3</span> 浠紡寮€鍦虹幆鑺?<span style="font-size:12px;color:var(--text-light);font-weight:400;">锛堝彲澶氶€夛級</span></div>
+      <div class="checklist" id="openingItems">
+        <div class="check-item" data-val="涓绘寔浜哄紑鍦鸿嚧杈?><span class="emoji">馃帳</span> 涓绘寔浜哄紑鍦鸿嚧杈?/div>
+        <div class="check-item" data-val="鎾斁鏆栧満瑙嗛"><span class="emoji">馃幀</span> 鎾斁鏆栧満瑙嗛</div>
+        <div class="check-item" data-val="鏂伴儙鍏ュ満"><span class="emoji">馃さ</span> 鏂伴儙鍏ュ満</div>
+        <div class="check-item" data-val="鏂板鍏ュ満锛堢埗浜查櫔鍚岋級"><span class="emoji">馃懓</span> 鏂板鍏ュ満锛堢埗浜查櫔鍚岋級</div>
+        <div class="check-item" data-val="鏂板鐙嚜鍏ュ満"><span class="emoji">馃拑</span> 鏂板鐙嚜鍏ュ満</div>
+        <div class="check-item" data-val="鏂伴儙杩庢帴鏂板"><span class="emoji">馃拹</span> 鏂伴儙杩庢帴鏂板</div>
+        <div class="check-item" data-val="鏂颁汉鍏卞悓鍏ュ満"><span class="emoji">馃毝鈥嶁檪锔忦煔垛€嶁檧锔?/span> 鏂颁汉鍏卞悓鍏ュ満</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="num">4</span> 浠紡鏍稿績鐜妭 <span style="font-size:12px;color:var(--text-light);font-weight:400;">锛堝彲澶氶€夛級</span></div>
+      <div class="checklist" id="coreItems">
+        <div class="check-item" data-val="浜ゆ崲鎴掓寚"><span class="emoji">馃拲</span> 浜ゆ崲鎴掓寚</div>
+        <div class="check-item" data-val="瀹ｈ瑾撹█"><span class="emoji">馃摐</span> 瀹ｈ瑾撹█</div>
+        <div class="check-item" data-val="璇佸浜鸿嚧杈?><span class="emoji">馃摉</span> 璇佸浜鸿嚧杈?/div>
+        <div class="check-item" data-val="鐖舵瘝鑷磋緸"><span class="emoji">馃懆鈥嶐煈┾€嶐煈?/span> 鐖舵瘝鑷磋緸</div>
+        <div class="check-item" data-val="鏂颁汉鑷磋緸/鎰熻阿"><span class="emoji">馃檹</span> 鏂颁汉鑷磋緸/鎰熻阿</div>
+        <div class="check-item" data-val="鍊掗妲?鍒囪泲绯?><span class="emoji">馃嵕</span> 鍊掗妲?鍒囪泲绯?/div>
+        <div class="check-item" data-val="鎶涙墜鎹ц姳"><span class="emoji">馃尯</span> 鎶涙墜鎹ц姳</div>
+        <div class="check-item" data-val="浜ゆ崲淇＄墿锛堥潪鎴掓寚锛?><span class="emoji">馃巵</span> 浜ゆ崲淇＄墿锛堥潪鎴掓寚锛?/div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="num">5</span> 鐗瑰埆鐜妭 <span style="font-size:12px;color:var(--text-light);font-weight:400;">锛堝彲澶氶€夛級</span></div>
+      <div class="checklist" id="specialItems">
+        <div class="check-item" data-val="鐖辨儏鏁呬簨璁茶堪"><span class="emoji">馃摉</span> 鐖辨儏鏁呬簨璁茶堪</div>
+        <div class="check-item" data-val="浜插弸绁濈瑙嗛"><span class="emoji">馃帴</span> 浜插弸绁濈瑙嗛</div>
+        <div class="check-item" data-val="鐜板満浜掑姩娓告垙"><span class="emoji">馃幃</span> 鐜板満浜掑姩娓告垙</div>
+        <div class="check-item" data-val="鎯婂枩鐜妭锛堢粰瀵规柟鐨勶級"><span class="emoji">馃巵</span> 鎯婂枩鐜妭锛堢粰瀵规柟鐨勶級</div>
+        <div class="check-item" data-val="绗竴鏀垶"><span class="emoji">馃拑馃暫</span> 绗竴鏀垶</div>
+        <div class="check-item" data-val="鍚堝敱/鎵嶈壓琛ㄦ紨"><span class="emoji">馃幍</span> 鍚堝敱/鎵嶈壓琛ㄦ紨</div>
+        <div class="check-item" data-val="鏀鹃姘旂悆/瀛旀槑鐏?><span class="emoji">馃巿</span> 鏀鹃姘旂悆/瀛旀槑鐏?/div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="prevStep()">鈫?涓婁竴姝?/button>
+      <button class="btn btn-primary" onclick="nextStep()">涓嬩竴姝?鈫?/button>
+    </div>
+  </div>
+
+  <!-- ============ 姝ラ涓夛細鐖辨儏鏁呬簨闂嵎 ============ -->
+  <div class="step-panel" id="step3">
+    <div class="card">
+      <div class="card-title"><span class="num">6</span> 鍒濋亣 路 鎬︾劧蹇冨姩</div>
+      <div class="guided-question">
+        <p class="q-text">馃挕 鎯充竴鎯筹細浣犱滑绗竴娆¤闈㈡槸鍦ㄥ摢閲岋紵閭ｅぉ鍙戠敓浜嗕粈涔堬紵浣犲浠?濂圭殑绗竴鍗拌薄鏄粈涔堬紵</p>
+      </div>
+      <div class="field-group">
+        <label>浣犱滑鏄€庝箞璁よ瘑鐨勶紵</label>
+        <textarea id="qHowMet" placeholder="璇峰啓涓嬩綘浠浉璇嗙殑鏁呬簨鈥︹€?></textarea>
+      </div>
+      <div class="field-group">
+        <label>绗竴娆¤闈㈡椂锛屾渶璁╀綘蹇冨姩鐨勭灛闂存槸浠€涔堬紵</label>
+        <textarea id="qFirstImpression" placeholder="閭ｄ釜璁╀綘鍐冲畾"灏辨槸TA浜?鐨勭灛闂粹€︹€?></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="num">7</span> 鐩告亱 路 鐢滆湝鏃跺厜</div>
+      <div class="guided-question">
+        <p class="q-text">馃挕 鎯充竴鎯筹細鎭嬬埍涓渶闅惧繕鐨勪竴娆＄害浼氾紵TA鍋氳繃鏈€璁╀綘鎰熷姩鐨勪竴浠朵簨锛熶綘浠叡鍚岀粡鍘嗚繃鏈€澶х殑鎸戞垬鏄粈涔堬紵</p>
+      </div>
+      <div class="field-group">
+        <label>鎭嬬埍鏈熼棿鏈€闅惧繕鐨勪竴娆＄害浼氭垨鏃呰</label>
+        <textarea id="qBestDate" placeholder="涓€璧峰幓浜嗗摢閲岋紵鍙戠敓浜嗕粈涔堟湁瓒ｇ殑浜嬶紵"></textarea>
+      </div>
+      <div class="field-group">
+        <label>TA 鍋氳繃鏈€璁╀綘鎰熷姩鐨勪竴浠朵簨</label>
+        <textarea id="qTouchingMoment" placeholder="閭ｄ釜璁╀綘瑙夊緱"杩欒緢瀛愬氨鏄疶A"鐨勬椂鍒烩€︹€?></textarea>
+      </div>
+      <div class="field-group">
+        <label>鐢ㄤ笁涓瘝褰㈠浣犱滑鐨勬劅鎯?/label>
+        <input type="text" id="qThreeWords" placeholder="渚嬪锛氭俯鏆栥€佹湁瓒ｃ€佺浉浜掓壎鎸?>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="num">8</span> 鍐冲畾 路 涓€鐢熶箣绾?/div>
+      <div class="guided-question">
+        <p class="q-text">馃挕 鎯充竴鎯筹細姹傚鐨勫満鏅繕璁板緱鍚楋紵鏄粈涔堣浣犱笅瀹氬喅蹇冨拰TA鍏卞害涓€鐢燂紵</p>
+      </div>
+      <div class="field-group">
+        <label>姹傚/鍐冲畾缁撳鐨勬晠浜?/label>
+        <textarea id="qProposal" placeholder="閭ｄ竴鍒绘槸鎬庢牱鐨勶紵璋佸厛寮€鐨勫彛锛?></textarea>
+      </div>
+      <div class="field-group">
+        <label>浣犳渶鍠滄TA鐨勫摢涓€鐐癸紵</label>
+        <textarea id="qFavoriteTrait" placeholder="閭ｄ釜璁╀綘姣忓ぉ閮芥洿鐖盩A鐨勭悊鐢扁€︹€?></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="num">9</span> 鏈潵 路 鍏辫荡灞辨捣</div>
+      <div class="field-group">
+        <label>瀵规湭鏉ュ濮荤敓娲荤殑鏈熷緟鎴栨効鏈?/label>
+        <textarea id="qFutureWish" placeholder="浣犱滑瀵规湭鏉ユ湁浠€涔堝叡鍚岀殑姊︽兂鎴栬鍒掞紵"></textarea>
+      </div>
+      <div class="field-group">
+        <label>鎯冲TA璇寸殑涓€鍙ュ績閲岃瘽</label>
+        <textarea id="qHeartWords" placeholder="鍦ㄥ绀艰繖澶╋紝浣犳渶鎯冲TA璇翠粈涔堬紵"></textarea>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="prevStep()">鈫?涓婁竴姝?/button>
+      <button class="btn btn-primary" onclick="generateResult()">鉁?鐢熸垚鎴戠殑濠氱ぜ鏁呬簨</button>
+    </div>
+  </div>
+
+  <!-- ============ 缁撴灉椤?============ -->
+  <div class="step-panel" id="resultPage">
+    <div class="card" id="resultContent"></div>
+    <div class="copy-bar">
+      <button class="btn btn-primary" onclick="copyResult()">馃搵 涓€閿鍒跺叏鏂?/button>
+      <button class="btn btn-outline" onclick="restart()">閲嶆柊濉啓</button>
+    </div>
+  </div>
+
+  <div class="footer-note">鎵€鏈変俊鎭粎淇濆瓨鍦ㄦ偍鐨勮澶囦笂 路 鍙斁蹇冨～鍐?/div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ===== 瀵艰埅 =====
+  let currentStep = 1;
+  const totalSteps = 3;
+
+  function updateProgress(step) {
+    const dots = document.querySelectorAll('.progress-dot');
+    const lines = document.querySelectorAll('.progress-line');
+    dots.forEach((d, i) => {
+      d.classList.remove('active', 'done');
+      if (i + 1 < step) d.classList.add('done');
+      if (i + 1 === step) d.classList.add('active');
+    });
+    lines.forEach((l, i) => {
+      l.classList.toggle('done', i + 1 < step);
+    });
+  }
+
+  function showStep(step) {
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    const panel = document.getElementById('step' + step) || document.getElementById('resultPage');
+    if (panel) panel.classList.add('active');
+    updateProgress(step);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function nextStep() {
+    if (currentStep < totalSteps) {
+      currentStep++;
+      showStep(currentStep);
+    }
+  }
+
+  function prevStep() {
+    if (currentStep > 1) {
+      currentStep--;
+      showStep(currentStep);
+    }
+  }
+
+  // ===== 澶氶€変氦浜?=====
+  document.querySelectorAll('.checklist').forEach(list => {
+    list.addEventListener('click', function(e) {
+      const item = e.target.closest('.check-item');
+      if (!item) return;
+      const checklist = item.parentElement;
+      if (checklist.dataset.single === 'true') {
+        checklist.querySelectorAll('.check-item').forEach(i => i.classList.remove('selected'));
+      }
+      item.classList.toggle('selected');
+    });
+  });
+
+  function getSelectedValues(listId) {
+    const items = document.querySelectorAll('#' + listId + ' .check-item.selected');
+    return Array.from(items).map(i => i.dataset.val);
+  }
+
+  // ===== 鐢熸垚缁撴灉 =====
+  function generateResult() {
+    const groom = document.getElementById('groomName').value.trim() || '锛堟柊閮庯級';
+    const bride = document.getElementById('brideName').value.trim() || '锛堟柊濞橈級';
+    const date = document.getElementById('weddingDate').value || '锛堝緟瀹氾級';
+    const venue = document.getElementById('venue').value.trim() || '锛堝緟瀹氾級';
+    const style = getSelectedValues('weddingStyle');
+    const opening = getSelectedValues('openingItems');
+    const core = getSelectedValues('coreItems');
+    const special = getSelectedValues('specialItems');
+
+    const howMet = document.getElementById('qHowMet').value.trim();
+    const firstImp = document.getElementById('qFirstImpression').value.trim();
+    const bestDate = document.getElementById('qBestDate').value.trim();
+    const touching = document.getElementById('qTouchingMoment').value.trim();
+    const threeWords = document.getElementById('qThreeWords').value.trim();
+    const proposal = document.getElementById('qProposal').value.trim();
+    const favorite = document.getElementById('qFavoriteTrait').value.trim();
+    const future = document.getElementById('qFutureWish').value.trim();
+    const heartWords = document.getElementById('qHeartWords').value.trim();
+
+    let html = '';
+
+    // 鍩烘湰淇℃伅鍖?    html += '<div class="result-block">';
+    html += '<h3>馃拻 濠氱ぜ鍩烘湰淇℃伅</h3>';
+    html += '<p><strong>鏂伴儙锛?/strong>' + groom + ' &nbsp;|&nbsp; <strong>鏂板锛?/strong>' + bride + '</p>';
+    html += '<p><strong>鏃ユ湡锛?/strong>' + date + ' &nbsp;|&nbsp; <strong>鍦哄湴锛?/strong>' + venue + '</p>';
+    if (style.length) {
+      html += '<p><strong>椋庢牸锛?/strong></p><div class="tag-list">' + style.map(s => '<span class="tag">' + s + '</span>').join('') + '</div>';
+    }
+    html += '</div>';
+
+    // 娴佺▼鍖?    html += '<div class="result-block"><h3>馃幁 浠紡娴佺▼娓呭崟</h3>';
+    if (opening.length) {
+      html += '<p><strong>寮€鍦虹幆鑺傦細</strong></p><div class="tag-list">' + opening.map(s => '<span class="tag">' + s + '</span>').join('') + '</div>';
+    }
+    if (core.length) {
+      html += '<p style="margin-top:8px;"><strong>鏍稿績鐜妭锛?/strong></p><div class="tag-list">' + core.map(s => '<span class="tag">' + s + '</span>').join('') + '</div>';
+    }
+    if (special.length) {
+      html += '<p style="margin-top:8px;"><strong>鐗瑰埆鐜妭锛?/strong></p><div class="tag-list">' + special.map(s => '<span class="tag">' + s + '</span>').join('') + '</div>';
+    }
+    if (!opening.length && !core.length && !special.length) {
+      html += '<p style="color:#999;">锛堟湭閫夋嫨锛?/p>';
+    }
+    html += '</div>';
+
+    // 鐖辨儏鏁呬簨鍖?    html += '<div class="result-block"><h3>馃挄 ' + groom + ' & ' + bride + ' 鐨勭埍鎯呮晠浜?/h3>';
+
+    if (howMet) html += '<p><strong>鐩歌瘑锛?/strong>' + howMet + '</p>';
+    if (firstImp) html += '<p><strong>蹇冨姩鐬棿锛?/strong>' + firstImp + '</p>';
+    if (bestDate) html += '<p><strong>鏈€闅惧繕鐨勭害浼氾細</strong>' + bestDate + '</p>';
+    if (touching) html += '<p><strong>鏈€鎰熷姩鐨勭灛闂达細</strong>' + touching + '</p>';
+    if (threeWords) html += '<p><strong>鎰熸儏鍏抽敭璇嶏細</strong>' + threeWords + '</p>';
+    if (proposal) html += '<p><strong>姹傚/鍐冲畾缁撳锛?/strong>' + proposal + '</p>';
+    if (favorite) html += '<p><strong>鏈€鍠滄TA鐨勪竴鐐癸細</strong>' + favorite + '</p>';
+    if (future) html += '<p><strong>瀵规湭鏉ョ殑鏈熷緟锛?/strong>' + future + '</p>';
+    if (heartWords) html += '<p style="margin-top:8px;padding:10px;background:#fdf5ec;border-radius:10px;"><strong>馃拰 鎯冲TA璇寸殑蹇冮噷璇濓細</strong><br>' + heartWords + '</p>';
+    if (!howMet && !firstImp && !bestDate && !touching && !proposal && !favorite && !future && !heartWords) {
+      html += '<p style="color:#999;">锛堢埍鎯呮晠浜嬮儴鍒嗗緟濉啓锛?/p>';
+    }
+    html += '</div>';
+
+    document.getElementById('resultContent').innerHTML = html;
+    showStep('result');
+    currentStep = 'result';
+    updateProgress(4); // 鍏ㄩ儴瀹屾垚
+  }
+
+  // ===== 澶嶅埗 =====
+  function copyResult() {
+    // 鎻愬彇绾枃鏈?    const container = document.getElementById('resultContent');
+    const text = container.innerText;
+
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => showToast('宸插鍒跺埌鍓创鏉?));
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('宸插鍒跺埌鍓创鏉?);
+    }
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 1800);
+  }
+
+  function restart() {
+    currentStep = 1;
+    showStep(1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+    </html>
