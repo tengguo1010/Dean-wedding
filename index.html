@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>å©ç¤¼ä»ªå¼é®å· - ç±ææäºæ¶é</title>
+<style>
+  :root {
+    --primary: #d4a574;
+    --primary-dark: #b8864e;
+    --bg: #faf7f4;
+    --card: #ffffff;
+    --text: #3d322b;
+    --text-light: #8c7b6e;
+    --border: #e8ddd2;
+    --shadow: 0 2px 16px rgba(0,0,0,0.06);
+    --radius: 14px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    padding-bottom: 100px;
+  }
+
+  /* é¡¶é¨è£é¥° */
+  .header-decoration {
+    height: 6px;
+    background: linear-gradient(90deg, #d4a574, #e2c8a5, #d4a574);
+  }
+
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  /* å¤´é¨ */
+  .header {
+    text-align: center;
+    padding: 32px 0 24px;
+  }
+
+  .header .icon {
+    font-size: 48px;
+    margin-bottom: 8px;
+  }
+
+  .header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #5a3e2b;
+    letter-spacing: 1px;
+  }
+
+  .header .subtitle {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 6px;
+  }
+
+  /* æ­¥éª¤æ¡ */
+  .progress-bar {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .progress-step {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .progress-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: var(--card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-light);
+    transition: all 0.3s;
+    flex-shrink: 0;
+  }
+
+  .progress-dot.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+  }
+
+  .progress-dot.done {
+    background: #c9b99a;
+    border-color: #c9b99a;
+    color: #fff;
+  }
+
+  .progress-line {
+    width: 40px;
+    height: 2px;
+    background: var(--border);
+    transition: background 0.3s;
+  }
+
+  .progress-line.done {
+    background: #c9b99a;
+  }
+
+  /* æ­¥éª¤é¢æ¿ */
+  .step-panel {
+    display: none;
+    animation: fadeSlideIn 0.35s ease;
+  }
+
+  .step-panel.active {
+    display: block;
+  }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* å¡ç */
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title .num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* è¡¨ååç´  */
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    background: #fefdfb;
+    color: var(--text);
+    transition: border-color 0.2s;
+    resize: vertical;
+  }
+
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(212,165,116,0.12);
+  }
+
+  textarea { min-height: 90px; }
+
+  .field-group {
+    margin-bottom: 16px;
+  }
+
+  .field-group:last-child { margin-bottom: 0; }
+
+  .hint {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  .row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* å¤éå¡ç */
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+    font-size: 14px;
+    background: #fefdfb;
+  }
+
+  .check-item:hover { border-color: #d4a574; }
+  .check-item.selected {
+    border-color: var(--primary);
+    background: #fdf5ec;
+  }
+
+  .check-item .checkbox-custom {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    font-size: 12px;
+    color: transparent;
+  }
+
+  .check-item.selected .checkbox-custom {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+  }
+
+  .check-item .emoji {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  /* æé® */
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+  }
+
+  .btn {
+    padding: 12px 32px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #d4a574, #c4905a);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(180,130,80,0.3);
+  }
+
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(180,130,80,0.4); }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-outline {
+    background: var(--card);
+    color: var(--text);
+    border: 1.5px solid var(--border);
+  }
+
+  .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+  /* ç»æé¡µ */
+  .result-block {
+    margin-bottom: 16px;
+  }
+
+  .result-block h3 {
+    font-size: 15px;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .result-block .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #fdf5ec;
+    color: #b07d44;
+    border-radius: 20px;
+    font-size: 13px;
+  }
+
+  .result-block p {
+    font-size: 14px;
+    white-space: pre-wrap;
+  }
+
+  .copy-bar {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .copy-bar .btn {
+    flex: 1;
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0.8);
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 14px;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translate(-50%,-50%) scale(1);
+  }
+
+  /* åºé¨ */
+  .footer-note {
+    text-align: center;
+    font-size: 12px;
+    color: #c4b8a8;
+    margin-top: 24px;
+  }
+
+  /* ç¬¬ä¸ä¸ªæ­¥éª¤ä¸­ç±ææäºçå¼å¯¼é®é¢ */
+  .guided-question {
+    margin-bottom: 14px;
+    padding: 10px 14px;
+    background: #fdf8f2;
+    border-radius: 10px;
+    border-left: 3px solid var(--primary);
+  }
+
+  .guided-question .q-text {
+    font-size: 13px;
+    color: #6b5a48;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+<div class="header-decoration"></div>
+
+<div class="container">
+
+  <!-- å¤´é¨ -->
+  <div class="header">
+    <div class="icon">ð</div>
+    <h1>å©ç¤¼ä»ªå¼é®å·</h1>
+    <p class="subtitle">å¸®å©ä¸»æäººæ´å¥½å°è®²è¿°ä½ ä»¬çæäº</p>
+  </div>
+
+  <!-- æ­¥éª¤æ¡ -->
+  <div class="progress-bar" id="progressBar">
+    <div class="progress-step">
+      <div class="progress-dot active" data-step="1">1</div>
+    </div>
+    <div class="progress-line" data-line="1"></div>
+    <div class="progress-step">
+      <div class="progress-dot" data-step="2">2</div>
+    </div>
+    <div class="progress-line" data-line="2"></div>
+    <div class="progress-step">
+      <div class="progress-dot" data-step="3">3</div>
+    </div>
+  </div>
+
+  <!-- ============ æ­¥éª¤ä¸ï¼åºæ¬ä¿¡æ¯ ============ -->
+  <div class="step-panel active" id="step1">
+    <div class="card">
+      <div class="card-title"><span class="num">1</span> æ°äººåºæ¬ä¿¡æ¯</div>
+      <div class="row-2">
+        <div class="field-group">
+          <label>æ°éå§å</label>
+          <input type="text" id="groomName" placeholder="è¯·è¾å¥æ°éå§å">
+        </div>
+        <div class="field-group">
+          <label>æ°å¨å§å</label>
+          <input type="text" id="brideName" placeholder="è¯·è¾å¥æ°å¨å§å">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="num">2</span> å©ç¤¼ä¿¡æ¯</div>
+      <div class="row-2">
+        <div class="field-group">
+          <label>å©ç¤¼æ¥æ</label>
+          <input type="date" id="weddingDate">
+        </div>
+        <div class="field-group">
+          <label>å©ç¤¼åºå°</label>
+          <input type="text" id="venue" placeholder="ä¾å¦ï¼XXéåº">
+        </div>
+      </div>
+      <div class="field-group">
+        <label>å©ç¤¼é£æ ¼</label>
+        <div class="checklist" id="weddingStyle">
+          <div class="check-item" data-val="ä¸­å¼ä¼ ç»"><span class="emoji">ð®</span> ä¸­å¼ä¼ ç»</div>
+          <div class="check-item" data-val="è¥¿å¼æµªæ¼«"><span class="emoji">ðï¸</span> è¥¿å¼æµªæ¼«</div>
+          <div class="check-item" data-val="æ·å¤èåª"><span class="emoji">ð¿</span> æ·å¤èåª</div>
+          <div class="check-item" data-val="æ£®ç³»æ¸æ°"><span class="emoji">ð²</span> æ£®ç³»æ¸æ°</div>
+          <div class="check-item" data-val="å¤å¤æèº"><span class="emoji">ðï¸</span> å¤å¤æèº</div>
+          <div class="check-item" data-val="ç®çº¦ç°ä»£"><span class="emoji">â¨</span> ç®çº¦ç°ä»£</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="nextStep()">ä¸ä¸æ­¥ â</button>
+    </div>
+  </div>
+
+  <!-- ============ æ­¥éª¤äºï¼ä»ªå¼æµç¨éæ© ============ -->
+  <div class="step-panel" id="step2">
+    <div class="card">
+      <div class="card-title"><span class="num">3</span> ä»ªå¼å¼åºç¯è <span style="font-size:12px;color:var(--text-light);font-weight:400;">ï¼å¯å¤éï¼</span></div>
+      <div class="checklist" id="openingItems">
+        <div class="check-item" data-val="ä¸»æäººå¼åºè´è¾"><span class="emoji">ð¤</span> ä¸»æäººå¼åºè´è¾</div>
+        <div class="check-item" data-val="æ­æ¾æåºè§é¢"><span class="emoji">ð¬</span> æ­æ¾æåºè§é¢</div>
+        <div class="check-item" data-val="æ°éå¥åº"><span class="emoji">ð¤µ</span> æ°éå¥åº</div>
+        <div class="check-item" data-val="æ°å¨å¥åºï¼ç¶äº²éªåï¼"><span class="emoji">ð°</span> æ°å¨å¥åºï¼ç¶äº²éªåï¼</div>
+        <div class="check-item" data-val="æ°å¨ç¬èªå¥åº"><span class="emoji">ð</span> æ°å¨ç¬èªå¥åº</div>
+        <div class="check-item" data-val="æ°éè¿æ¥æ°å¨"><span class="emoji">ð</span> æ°éè¿æ¥æ°å¨</div>
+        <div class="check-item" data-val="æ°äººå±åå¥åº"><span class="emoji">ð¶ââï¸ð¶ââï¸</span> æ°äººå±åå¥åº</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="num">4</span> ä»ªå¼æ ¸å¿ç¯è <span style="font-size:12px;color:var(--text-light);font-weight:400;">ï¼å¯å¤éï¼</span></div>
+      <div class="checklist" id="coreItems">
+        <div class="check-item" data-val="äº¤æ¢ææ"><span class="emoji">ð</span> äº¤æ¢ææ</div>
+        <div class="check-item" data-val="å®£è¯»èªè¨"><span class="emoji">ð</span> å®£è¯»èªè¨</div>
+        <div class="check-item" data-val="è¯å©äººè´è¾"><span class="emoji">ð</span> è¯å©äººè´è¾</div>
+        <div class="check-item" data-val="ç¶æ¯è´è¾"><span class="emoji">ð¨âð©âð§</span> ç¶æ¯è´è¾</div>
+        <div class="check-item" data-val="æ°äººè´è¾/æè°¢"><span class="emoji">ð</span> æ°äººè´è¾/æè°¢</div>
+        <div class="check-item" data-val="åé¦æ§/åèç³"><span class="emoji">ð¾</span> åé¦æ§/åèç³</div>
+        <div class="check-item" data-val="æææ§è±"><span class="emoji">ðº</span> æææ§è±</div>
+        <div class="check-item" data-val="äº¤æ¢ä¿¡ç©ï¼éææï¼"><span class="emoji">ð</span> äº¤æ¢ä¿¡ç©ï¼éææï¼</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="num">5</span> ç¹å«ç¯è <span style="font-size:12px;color:var(--text-light);font-weight:400;">ï¼å¯å¤éï¼</span></div>
+      <div class="checklist" id="specialItems">
+        <div class="check-item" data-val="ç±ææäºè®²è¿°"><span class="emoji">ð</span> ç±ææäºè®²è¿°</div>
+        <div class="check-item" data-val="äº²åç¥ç¦è§é¢"><span class="emoji">ð¥</span> äº²åç¥ç¦è§é¢</div>
+        <div class="check-item" data-val="ç°åºäºå¨æ¸¸æ"><span class="emoji">ð®</span> ç°åºäºå¨æ¸¸æ</div>
+        <div class="check-item" data-val="æåç¯èï¼ç»å¯¹æ¹çï¼"><span class="emoji">ð</span> æåç¯èï¼ç»å¯¹æ¹çï¼</div>
+        <div class="check-item" data-val="ç¬¬ä¸æ¯è"><span class="emoji">ððº</span> ç¬¬ä¸æ¯è</div>
+        <div class="check-item" data-val="åå±/æèºè¡¨æ¼"><span class="emoji">ðµ</span> åå±/æèºè¡¨æ¼</div>
+        <div class="check-item" data-val="æ¾é£æ°ç/å­æç¯"><span class="emoji">ð</span> æ¾é£æ°ç/å­æç¯</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="prevStep()">â ä¸ä¸æ­¥</button>
+      <button class="btn btn-primary" onclick="nextStep()">ä¸ä¸æ­¥ â</button>
+    </div>
+  </div>
+
+  <!-- ============ æ­¥éª¤ä¸ï¼ç±ææäºé®å· ============ -->
+  <div class="step-panel" id="step3">
+    <div class="card">
+      <div class="card-title"><span class="num">6</span> åé Â· æ¦ç¶å¿å¨</div>
+      <div class="guided-question">
+        <p class="q-text">ð¡ æ³ä¸æ³ï¼ä½ ä»¬ç¬¬ä¸æ¬¡è§é¢æ¯å¨åªéï¼é£å¤©åçäºä»ä¹ï¼ä½ å¯¹ä»/å¥¹çç¬¬ä¸å°è±¡æ¯ä»ä¹ï¼</p>
+      </div>
+      <div class="field-group">
+        <label>ä½ ä»¬æ¯æä¹è®¤è¯çï¼</label>
+        <textarea id="qHowMet" placeholder="è¯·åä¸ä½ ä»¬ç¸è¯çæäºâ¦â¦"></textarea>
+      </div>
+      <div class="field-group">
+        <label>ç¬¬ä¸æ¬¡è§é¢æ¶ï¼æè®©ä½ å¿å¨çç¬é´æ¯ä»ä¹ï¼</label>
+        <textarea id="qFirstImpression" placeholder="é£ä¸ªè®©ä½ å³å®"å°±æ¯TAäº"çç¬é´â¦â¦"></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="num">7</span> ç¸æ Â· çèæ¶å</div>
+      <div class="guided-question">
+        <p class="q-text">ð¡ æ³ä¸æ³ï¼æç±ä¸­æé¾å¿çä¸æ¬¡çº¦ä¼ï¼TAåè¿æè®©ä½ æå¨çä¸ä»¶äºï¼ä½ ä»¬å±åç»åè¿æå¤§çæææ¯ä»ä¹ï¼</p>
+      </div>
+      <div class="field-group">
+        <label>æç±æé´æé¾å¿çä¸æ¬¡çº¦ä¼ææè¡</label>
+        <textarea id="qBestDate" placeholder="ä¸èµ·å»äºåªéï¼åçäºä»ä¹æè¶£çäºï¼"></textarea>
+      </div>
+      <div class="field-group">
+        <label>TA åè¿æè®©ä½ æå¨çä¸ä»¶äº</label>
+        <textarea id="qTouchingMoment" placeholder="é£ä¸ªè®©ä½ è§å¾"è¿è¾å­å°±æ¯TA"çæ¶å»â¦â¦"></textarea>
+      </div>
+      <div class="field-group">
+        <label>ç¨ä¸ä¸ªè¯å½¢å®¹ä½ ä»¬çææ</label>
+        <input type="text" id="qThreeWords" placeholder="ä¾å¦ï¼æ¸©æãæè¶£ãç¸äºæ¶æ">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="num">8</span> å³å® Â· ä¸çä¹çº¦</div>
+      <div class="guided-question">
+        <p class="q-text">ð¡ æ³ä¸æ³ï¼æ±å©çåºæ¯è¿è®°å¾åï¼æ¯ä»ä¹è®©ä½ ä¸å®å³å¿åTAå±åº¦ä¸çï¼</p>
+      </div>
+      <div class="field-group">
+        <label>æ±å©/å³å®ç»å©çæäº</label>
+        <textarea id="qProposal" placeholder="é£ä¸å»æ¯ææ ·çï¼è°åå¼çå£ï¼"></textarea>
+      </div>
+      <div class="field-group">
+        <label>ä½ æåæ¬¢TAçåªä¸ç¹ï¼</label>
+        <textarea id="qFavoriteTrait" placeholder="é£ä¸ªè®©ä½ æ¯å¤©é½æ´ç±TAççç±â¦â¦"></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="num">9</span> æªæ¥ Â· å±èµ´å±±æµ·</div>
+      <div class="field-group">
+        <label>å¯¹æªæ¥å©å§»çæ´»çæå¾ææ¿æ</label>
+        <textarea id="qFutureWish" placeholder="ä½ ä»¬å¯¹æªæ¥æä»ä¹å±åçæ¢¦æ³æè®¡åï¼"></textarea>
+      </div>
+      <div class="field-group">
+        <label>æ³å¯¹TAè¯´çä¸å¥å¿éè¯</label>
+        <textarea id="qHeartWords" placeholder="å¨å©ç¤¼è¿å¤©ï¼ä½ ææ³å¯¹TAè¯´ä»ä¹ï¼"></textarea>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="prevStep()">â ä¸ä¸æ­¥</button>
+      <button class="btn btn-primary" onclick="generateResult()">â¨ çææçå©ç¤¼æäº</button>
+    </div>
+  </div>
+
+  <!-- ============ ç»æé¡µ ============ -->
+  <div class="step-panel" id="resultPage">
+    <div class="card" id="resultContent"></div>
+    <div class="copy-bar">
+      <button class="btn btn-primary" onclick="copyResult()">ð ä¸é®å¤å¶å¨æ</button>
+      <button class="btn btn-outline" onclick="restart()">éæ°å¡«å</button>
+    </div>
+  </div>
+
+  <div class="footer-note">ææä¿¡æ¯ä»ä¿å­å¨æ¨çè®¾å¤ä¸ Â· å¯æ¾å¿å¡«å</div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ===== å¯¼èª =====
+  let currentStep = 1;
+  const totalSteps = 3;
+
+  function updateProgress(step) {
+    const dots = document.querySelectorAll('.progress-dot');
+    const lines = document.querySelectorAll('.progress-line');
+    dots.forEach((d, i) => {
+      d.classList.remove('active', 'done');
+      if (i + 1 < step) d.classList.add('done');
+      if (i + 1 === step) d.classList.add('active');
+    });
+    lines.forEach((l, i) => {
+      l.classList.toggle('done', i + 1 < step);
+    });
+  }
+
+  function showStep(step) {
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    const panel = document.getElementById('step' + step) || document.getElementById('resultPage');
+    if (panel) panel.classList.add('active');
+    updateProgress(step);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function nextStep() {
+    if (currentStep < totalSteps) {
+      currentStep++;
+      showStep(currentStep);
+    }
+  }
+
+  function prevStep() {
+    if (currentStep > 1) {
+      currentStep--;
+      showStep(currentStep);
+    }
+  }
+
+  // ===== å¤éäº¤äº =====
+  document.querySelectorAll('.checklist').forEach(list => {
+    list.addEventListener('click', function(e) {
+      const item = e.target.closest('.check-item');
+      if (!item) return;
+      const checklist = item.parentElement;
+      if (checklist.dataset.single === 'true') {
+        checklist.querySelectorAll('.check-item').forEach(i => i.classList.remove('selected'));
+      }
+      item.classList.toggle('selected');
+    });
+  });
+
+  function getSelectedValues(listId) {
+    const items = document.querySelectorAll('#' + listId + ' .check-item.selected');
+    return Array.from(items).map(i => i.dataset.val);
+  }
+
+  // ===== çæç»æ =====
+  function generateResult() {
+    const groom = document.getElementById('groomName').value.trim() || 'ï¼æ°éï¼';
+    const bride = document.getElementById('brideName').value.trim() || 'ï¼æ°å¨ï¼';
+    const date = document.getElementById('weddingDate').value || 'ï¼å¾å®ï¼';
+    const venue = document.getElementById('venue').value.trim() || 'ï¼å¾å®ï¼';
+    const style = getSelectedValues('weddingStyle');
+    const opening = getSelectedValues('openingItems');
+    const core = getSelectedValues('coreItems');
+    const special = getSelectedValues('specialItems');
+
+    const howMet = document.getElementById('qHowMet').value.trim();
+    const firstImp = document.getElementById('qFirstImpression').value.trim();
+    const bestDate = document.getElementById('qBestDate').value.trim();
+    const touching = document.getElementById('qTouchingMoment').value.trim();
+    const threeWords = document.getElementById('qThreeWords').value.trim();
+    const proposal = document.getElementById('qProposal').value.trim();
+    const favorite = document.getElementById('qFavoriteTrait').value.trim();
+    const future = document.getElementById('qFutureWish').value.trim();
+    const heartWords = document.getElementById('qHeartWords').value.trim();
+
+    let html = '';
+
+    // åºæ¬ä¿¡æ¯åº
+    html += '<div class="result-block">';
+    html += '<h3>ð å©ç¤¼åºæ¬ä¿¡æ¯</h3>';
+    html += '<p><strong>æ°éï¼</strong>' + groom + ' &nbsp;|&nbsp; <strong>æ°å¨ï¼</strong>' + bride + '</p>';
+    html += '<p><strong>æ¥æï¼</strong>' + date + ' &nbsp;|&nbsp; <strong>åºå°ï¼</strong>' + venue + '</p>';
+    if (style.length) {
+      html += '<p><strong>é£æ ¼ï¼</strong></p><div class="tag-list">' + style.map(s => '<span class="tag">' + s + '</span>').join('') + '</div>';
+    }
+    html += '</div>';
+
+    // æµç¨åº
+    html += '<div class="result-block"><h3>ð­ ä»ªå¼æµç¨æ¸å</h3>';
+    if (opening.length) {
+      html += '<p><strong>å¼åºç¯èï¼</strong></p><div class="tag-list">' + opening.map(s => '<span class="tag">' + s + '</span>').join('') + '</div>';
+    }
+    if (core.length) {
+      html += '<p style="margin-top:8px;"><strong>æ ¸å¿ç¯èï¼</strong></p><div class="tag-list">' + core.map(s => '<span class="tag">' + s + '</span>').join('') + '</div>';
+    }
+    if (special.length) {
+      html += '<p style="margin-top:8px;"><strong>ç¹å«ç¯èï¼</strong></p><div class="tag-list">' + special.map(s => '<span class="tag">' + s + '</span>').join('') + '</div>';
+    }
+    if (!opening.length && !core.length && !special.length) {
+      html += '<p style="color:#999;">ï¼æªéæ©ï¼</p>';
+    }
+    html += '</div>';
+
+    // ç±ææäºåº
+    html += '<div class="result-block"><h3>ð ' + groom + ' & ' + bride + ' çç±ææäº</h3>';
+
+    if (howMet) html += '<p><strong>ç¸è¯ï¼</strong>' + howMet + '</p>';
+    if (firstImp) html += '<p><strong>å¿å¨ç¬é´ï¼</strong>' + firstImp + '</p>';
+    if (bestDate) html += '<p><strong>æé¾å¿ççº¦ä¼ï¼</strong>' + bestDate + '</p>';
+    if (touching) html += '<p><strong>ææå¨çç¬é´ï¼</strong>' + touching + '</p>';
+    if (threeWords) html += '<p><strong>ææå³é®è¯ï¼</strong>' + threeWords + '</p>';
+    if (proposal) html += '<p><strong>æ±å©/å³å®ç»å©ï¼</strong>' + proposal + '</p>';
+    if (favorite) html += '<p><strong>æåæ¬¢TAçä¸ç¹ï¼</strong>' + favorite + '</p>';
+    if (future) html += '<p><strong>å¯¹æªæ¥çæå¾ï¼</strong>' + future + '</p>';
+    if (heartWords) html += '<p style="margin-top:8px;padding:10px;background:#fdf5ec;border-radius:10px;"><strong>ð æ³å¯¹TAè¯´çå¿éè¯ï¼</strong><br>' + heartWords + '</p>';
+    if (!howMet && !firstImp && !bestDate && !touching && !proposal && !favorite && !future && !heartWords) {
+      html += '<p style="color:#999;">ï¼ç±ææäºé¨åå¾å¡«åï¼</p>';
+    }
+    html += '</div>';
+
+    document.getElementById('resultContent').innerHTML = html;
+    showStep('result');
+    currentStep = 'result';
+    updateProgress(4); // å¨é¨å®æ
+  }
+
+  // ===== å¤å¶ =====
+  function copyResult() {
+    // æåçº¯ææ¬
+    const container = document.getElementById('resultContent');
+    const text = container.innerText;
+
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => showToast('å·²å¤å¶å°åªè´´æ¿'));
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('å·²å¤å¶å°åªè´´æ¿');
+    }
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 1800);
+  }
+
+  function restart() {
+    currentStep = 1;
+    showStep(1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
