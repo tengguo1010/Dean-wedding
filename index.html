@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>å©ç¤¼ä»ªå¼é®å· - ç±ææäºæ¶é</title>
+<title>婚礼仪式问卷 - 爱情故事收集</title>
 <style>
   :root {
     --primary: #d4a574;
@@ -28,7 +28,7 @@
     padding-bottom: 100px;
   }
 
-  /* é¡¶é¨è£é¥° */
+  /* 顶部装饰 */
   .header-decoration {
     height: 6px;
     background: linear-gradient(90deg, #d4a574, #e2c8a5, #d4a574);
@@ -40,7 +40,7 @@
     padding: 0 16px;
   }
 
-  /* å¤´é¨ */
+  /* 头部 */
   .header {
     text-align: center;
     padding: 32px 0 24px;
@@ -64,7 +64,7 @@
     margin-top: 6px;
   }
 
-  /* æ­¥éª¤æ¡ */
+  /* 步骤条 */
   .progress-bar {
     display: flex;
     justify-content: center;
@@ -118,7 +118,7 @@
     background: #c9b99a;
   }
 
-  /* æ­¥éª¤é¢æ¿ */
+  /* 步骤面板 */
   .step-panel {
     display: none;
     animation: fadeSlideIn 0.35s ease;
@@ -133,7 +133,7 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* å¡ç */
+  /* 卡片 */
   .card {
     background: var(--card);
     border-radius: var(--radius);
@@ -164,7 +164,7 @@
     flex-shrink: 0;
   }
 
-  /* è¡¨ååç´  */
+  /* 表单元素 */
   label {
     display: block;
     font-size: 14px;
@@ -213,7 +213,7 @@
     gap: 12px;
   }
 
-  /* å¤éå¡ç */
+  /* 多选卡片 */
   .checklist {
     display: flex;
     flex-direction: column;
@@ -265,7 +265,7 @@
     flex-shrink: 0;
   }
 
-  /* æé® */
+  /* 按钮 */
   .btn-row {
     display: flex;
     gap: 10px;
@@ -301,7 +301,7 @@
 
   .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
 
-  /* ç»æé¡µ */
+  /* 结果页 */
   .result-block {
     margin-bottom: 16px;
   }
@@ -367,7 +367,7 @@
     transform: translate(-50%,-50%) scale(1);
   }
 
-  /* åºé¨ */
+  /* 底部 */
   .footer-note {
     text-align: center;
     font-size: 12px;
@@ -375,7 +375,7 @@
     margin-top: 24px;
   }
 
-  /* ç¬¬ä¸ä¸ªæ­¥éª¤ä¸­ç±ææäºçå¼å¯¼é®é¢ */
+  /* 第三个步骤中爱情故事的引导问题 */
   .guided-question {
     margin-bottom: 14px;
     padding: 10px 14px;
@@ -398,14 +398,14 @@
 
 <div class="container">
 
-  <!-- å¤´é¨ -->
+  <!-- 头部 -->
   <div class="header">
-    <div class="icon">ð</div>
-    <h1>å©ç¤¼ä»ªå¼é®å·</h1>
-    <p class="subtitle">å¸®å©ä¸»æäººæ´å¥½å°è®²è¿°ä½ ä»¬çæäº</p>
+    <div class="icon">💍</div>
+    <h1>婚礼仪式问卷</h1>
+    <p class="subtitle">帮助主持人更好地讲述你们的故事</p>
   </div>
 
-  <!-- æ­¥éª¤æ¡ -->
+  <!-- 步骤条 -->
   <div class="progress-bar" id="progressBar">
     <div class="progress-step">
       <div class="progress-dot active" data-step="1">1</div>
@@ -420,186 +420,186 @@
     </div>
   </div>
 
-  <!-- ============ æ­¥éª¤ä¸ï¼åºæ¬ä¿¡æ¯ ============ -->
+  <!-- ============ 步骤一：基本信息 ============ -->
   <div class="step-panel active" id="step1">
     <div class="card">
-      <div class="card-title"><span class="num">1</span> æ°äººåºæ¬ä¿¡æ¯</div>
+      <div class="card-title"><span class="num">1</span> 新人基本信息</div>
       <div class="row-2">
         <div class="field-group">
-          <label>æ°éå§å</label>
-          <input type="text" id="groomName" placeholder="è¯·è¾å¥æ°éå§å">
+          <label>新郎姓名</label>
+          <input type="text" id="groomName" placeholder="请输入新郎姓名">
         </div>
         <div class="field-group">
-          <label>æ°å¨å§å</label>
-          <input type="text" id="brideName" placeholder="è¯·è¾å¥æ°å¨å§å">
+          <label>新娘姓名</label>
+          <input type="text" id="brideName" placeholder="请输入新娘姓名">
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title"><span class="num">2</span> å©ç¤¼ä¿¡æ¯</div>
+      <div class="card-title"><span class="num">2</span> 婚礼信息</div>
       <div class="row-2">
         <div class="field-group">
-          <label>å©ç¤¼æ¥æ</label>
+          <label>婚礼日期</label>
           <input type="date" id="weddingDate">
         </div>
         <div class="field-group">
-          <label>å©ç¤¼åºå°</label>
-          <input type="text" id="venue" placeholder="ä¾å¦ï¼XXéåº">
+          <label>婚礼场地</label>
+          <input type="text" id="venue" placeholder="例如：XX酒店">
         </div>
       </div>
       <div class="field-group">
-        <label>å©ç¤¼é£æ ¼</label>
+        <label>婚礼风格</label>
         <div class="checklist" id="weddingStyle">
-          <div class="check-item" data-val="ä¸­å¼ä¼ ç»"><span class="emoji">ð®</span> ä¸­å¼ä¼ ç»</div>
-          <div class="check-item" data-val="è¥¿å¼æµªæ¼«"><span class="emoji">ðï¸</span> è¥¿å¼æµªæ¼«</div>
-          <div class="check-item" data-val="æ·å¤èåª"><span class="emoji">ð¿</span> æ·å¤èåª</div>
-          <div class="check-item" data-val="æ£®ç³»æ¸æ°"><span class="emoji">ð²</span> æ£®ç³»æ¸æ°</div>
-          <div class="check-item" data-val="å¤å¤æèº"><span class="emoji">ðï¸</span> å¤å¤æèº</div>
-          <div class="check-item" data-val="ç®çº¦ç°ä»£"><span class="emoji">â¨</span> ç®çº¦ç°ä»£</div>
+          <div class="check-item" data-val="中式传统"><span class="emoji">🏮</span> 中式传统</div>
+          <div class="check-item" data-val="西式浪漫"><span class="emoji">🕊️</span> 西式浪漫</div>
+          <div class="check-item" data-val="户外草坪"><span class="emoji">🌿</span> 户外草坪</div>
+          <div class="check-item" data-val="森系清新"><span class="emoji">🌲</span> 森系清新</div>
+          <div class="check-item" data-val="复古文艺"><span class="emoji">🎞️</span> 复古文艺</div>
+          <div class="check-item" data-val="简约现代"><span class="emoji">✨</span> 简约现代</div>
         </div>
       </div>
     </div>
 
     <div class="btn-row">
-      <button class="btn btn-primary" onclick="nextStep()">ä¸ä¸æ­¥ â</button>
+      <button class="btn btn-primary" onclick="nextStep()">下一步 →</button>
     </div>
   </div>
 
-  <!-- ============ æ­¥éª¤äºï¼ä»ªå¼æµç¨éæ© ============ -->
+  <!-- ============ 步骤二：仪式流程选择 ============ -->
   <div class="step-panel" id="step2">
     <div class="card">
-      <div class="card-title"><span class="num">3</span> ä»ªå¼å¼åºç¯è <span style="font-size:12px;color:var(--text-light);font-weight:400;">ï¼å¯å¤éï¼</span></div>
+      <div class="card-title"><span class="num">3</span> 仪式开场环节 <span style="font-size:12px;color:var(--text-light);font-weight:400;">（可多选）</span></div>
       <div class="checklist" id="openingItems">
-        <div class="check-item" data-val="ä¸»æäººå¼åºè´è¾"><span class="emoji">ð¤</span> ä¸»æäººå¼åºè´è¾</div>
-        <div class="check-item" data-val="æ­æ¾æåºè§é¢"><span class="emoji">ð¬</span> æ­æ¾æåºè§é¢</div>
-        <div class="check-item" data-val="æ°éå¥åº"><span class="emoji">ð¤µ</span> æ°éå¥åº</div>
-        <div class="check-item" data-val="æ°å¨å¥åºï¼ç¶äº²éªåï¼"><span class="emoji">ð°</span> æ°å¨å¥åºï¼ç¶äº²éªåï¼</div>
-        <div class="check-item" data-val="æ°å¨ç¬èªå¥åº"><span class="emoji">ð</span> æ°å¨ç¬èªå¥åº</div>
-        <div class="check-item" data-val="æ°éè¿æ¥æ°å¨"><span class="emoji">ð</span> æ°éè¿æ¥æ°å¨</div>
-        <div class="check-item" data-val="æ°äººå±åå¥åº"><span class="emoji">ð¶ââï¸ð¶ââï¸</span> æ°äººå±åå¥åº</div>
+        <div class="check-item" data-val="主持人开场致辞"><span class="emoji">🎤</span> 主持人开场致辞</div>
+        <div class="check-item" data-val="播放暖场视频"><span class="emoji">🎬</span> 播放暖场视频</div>
+        <div class="check-item" data-val="新郎入场"><span class="emoji">🤵</span> 新郎入场</div>
+        <div class="check-item" data-val="新娘入场（父亲陪同）"><span class="emoji">👰</span> 新娘入场（父亲陪同）</div>
+        <div class="check-item" data-val="新娘独自入场"><span class="emoji">💃</span> 新娘独自入场</div>
+        <div class="check-item" data-val="新郎迎接新娘"><span class="emoji">💐</span> 新郎迎接新娘</div>
+        <div class="check-item" data-val="新人共同入场"><span class="emoji">🚶‍♂️🚶‍♀️</span> 新人共同入场</div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title"><span class="num">4</span> ä»ªå¼æ ¸å¿ç¯è <span style="font-size:12px;color:var(--text-light);font-weight:400;">ï¼å¯å¤éï¼</span></div>
+      <div class="card-title"><span class="num">4</span> 仪式核心环节 <span style="font-size:12px;color:var(--text-light);font-weight:400;">（可多选）</span></div>
       <div class="checklist" id="coreItems">
-        <div class="check-item" data-val="äº¤æ¢ææ"><span class="emoji">ð</span> äº¤æ¢ææ</div>
-        <div class="check-item" data-val="å®£è¯»èªè¨"><span class="emoji">ð</span> å®£è¯»èªè¨</div>
-        <div class="check-item" data-val="è¯å©äººè´è¾"><span class="emoji">ð</span> è¯å©äººè´è¾</div>
-        <div class="check-item" data-val="ç¶æ¯è´è¾"><span class="emoji">ð¨âð©âð§</span> ç¶æ¯è´è¾</div>
-        <div class="check-item" data-val="æ°äººè´è¾/æè°¢"><span class="emoji">ð</span> æ°äººè´è¾/æè°¢</div>
-        <div class="check-item" data-val="åé¦æ§/åèç³"><span class="emoji">ð¾</span> åé¦æ§/åèç³</div>
-        <div class="check-item" data-val="æææ§è±"><span class="emoji">ðº</span> æææ§è±</div>
-        <div class="check-item" data-val="äº¤æ¢ä¿¡ç©ï¼éææï¼"><span class="emoji">ð</span> äº¤æ¢ä¿¡ç©ï¼éææï¼</div>
+        <div class="check-item" data-val="交换戒指"><span class="emoji">💍</span> 交换戒指</div>
+        <div class="check-item" data-val="宣读誓言"><span class="emoji">📜</span> 宣读誓言</div>
+        <div class="check-item" data-val="证婚人致辞"><span class="emoji">📖</span> 证婚人致辞</div>
+        <div class="check-item" data-val="父母致辞"><span class="emoji">👨‍👩‍👧</span> 父母致辞</div>
+        <div class="check-item" data-val="新人致辞/感谢"><span class="emoji">🙏</span> 新人致辞/感谢</div>
+        <div class="check-item" data-val="倒香槟/切蛋糕"><span class="emoji">🍾</span> 倒香槟/切蛋糕</div>
+        <div class="check-item" data-val="抛手捧花"><span class="emoji">🌺</span> 抛手捧花</div>
+        <div class="check-item" data-val="交换信物（非戒指）"><span class="emoji">🎁</span> 交换信物（非戒指）</div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title"><span class="num">5</span> ç¹å«ç¯è <span style="font-size:12px;color:var(--text-light);font-weight:400;">ï¼å¯å¤éï¼</span></div>
+      <div class="card-title"><span class="num">5</span> 特别环节 <span style="font-size:12px;color:var(--text-light);font-weight:400;">（可多选）</span></div>
       <div class="checklist" id="specialItems">
-        <div class="check-item" data-val="ç±ææäºè®²è¿°"><span class="emoji">ð</span> ç±ææäºè®²è¿°</div>
-        <div class="check-item" data-val="äº²åç¥ç¦è§é¢"><span class="emoji">ð¥</span> äº²åç¥ç¦è§é¢</div>
-        <div class="check-item" data-val="ç°åºäºå¨æ¸¸æ"><span class="emoji">ð®</span> ç°åºäºå¨æ¸¸æ</div>
-        <div class="check-item" data-val="æåç¯èï¼ç»å¯¹æ¹çï¼"><span class="emoji">ð</span> æåç¯èï¼ç»å¯¹æ¹çï¼</div>
-        <div class="check-item" data-val="ç¬¬ä¸æ¯è"><span class="emoji">ððº</span> ç¬¬ä¸æ¯è</div>
-        <div class="check-item" data-val="åå±/æèºè¡¨æ¼"><span class="emoji">ðµ</span> åå±/æèºè¡¨æ¼</div>
-        <div class="check-item" data-val="æ¾é£æ°ç/å­æç¯"><span class="emoji">ð</span> æ¾é£æ°ç/å­æç¯</div>
+        <div class="check-item" data-val="爱情故事讲述"><span class="emoji">📖</span> 爱情故事讲述</div>
+        <div class="check-item" data-val="亲友祝福视频"><span class="emoji">🎥</span> 亲友祝福视频</div>
+        <div class="check-item" data-val="现场互动游戏"><span class="emoji">🎮</span> 现场互动游戏</div>
+        <div class="check-item" data-val="惊喜环节（给对方的）"><span class="emoji">🎁</span> 惊喜环节（给对方的）</div>
+        <div class="check-item" data-val="第一支舞"><span class="emoji">💃🕺</span> 第一支舞</div>
+        <div class="check-item" data-val="合唱/才艺表演"><span class="emoji">🎵</span> 合唱/才艺表演</div>
+        <div class="check-item" data-val="放飞气球/孔明灯"><span class="emoji">🎈</span> 放飞气球/孔明灯</div>
       </div>
     </div>
 
     <div class="btn-row">
-      <button class="btn btn-outline" onclick="prevStep()">â ä¸ä¸æ­¥</button>
-      <button class="btn btn-primary" onclick="nextStep()">ä¸ä¸æ­¥ â</button>
+      <button class="btn btn-outline" onclick="prevStep()">← 上一步</button>
+      <button class="btn btn-primary" onclick="nextStep()">下一步 →</button>
     </div>
   </div>
 
-  <!-- ============ æ­¥éª¤ä¸ï¼ç±ææäºé®å· ============ -->
+  <!-- ============ 步骤三：爱情故事问卷 ============ -->
   <div class="step-panel" id="step3">
     <div class="card">
-      <div class="card-title"><span class="num">6</span> åé Â· æ¦ç¶å¿å¨</div>
+      <div class="card-title"><span class="num">6</span> 初遇 · 怦然心动</div>
       <div class="guided-question">
-        <p class="q-text">ð¡ æ³ä¸æ³ï¼ä½ ä»¬ç¬¬ä¸æ¬¡è§é¢æ¯å¨åªéï¼é£å¤©åçäºä»ä¹ï¼ä½ å¯¹ä»/å¥¹çç¬¬ä¸å°è±¡æ¯ä»ä¹ï¼</p>
+        <p class="q-text">💡 想一想：你们第一次见面是在哪里？那天发生了什么？你对他/她的第一印象是什么？</p>
       </div>
       <div class="field-group">
-        <label>ä½ ä»¬æ¯æä¹è®¤è¯çï¼</label>
-        <textarea id="qHowMet" placeholder="è¯·åä¸ä½ ä»¬ç¸è¯çæäºâ¦â¦"></textarea>
+        <label>你们是怎么认识的？</label>
+        <textarea id="qHowMet" placeholder="请写下你们相识的故事……"></textarea>
       </div>
       <div class="field-group">
-        <label>ç¬¬ä¸æ¬¡è§é¢æ¶ï¼æè®©ä½ å¿å¨çç¬é´æ¯ä»ä¹ï¼</label>
-        <textarea id="qFirstImpression" placeholder="é£ä¸ªè®©ä½ å³å®"å°±æ¯TAäº"çç¬é´â¦â¦"></textarea>
+        <label>第一次见面时，最让你心动的瞬间是什么？</label>
+        <textarea id="qFirstImpression" placeholder="那个让你决定"就是TA了"的瞬间……"></textarea>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title"><span class="num">7</span> ç¸æ Â· çèæ¶å</div>
+      <div class="card-title"><span class="num">7</span> 相恋 · 甜蜜时光</div>
       <div class="guided-question">
-        <p class="q-text">ð¡ æ³ä¸æ³ï¼æç±ä¸­æé¾å¿çä¸æ¬¡çº¦ä¼ï¼TAåè¿æè®©ä½ æå¨çä¸ä»¶äºï¼ä½ ä»¬å±åç»åè¿æå¤§çæææ¯ä»ä¹ï¼</p>
+        <p class="q-text">💡 想一想：恋爱中最难忘的一次约会？TA做过最让你感动的一件事？你们共同经历过最大的挑战是什么？</p>
       </div>
       <div class="field-group">
-        <label>æç±æé´æé¾å¿çä¸æ¬¡çº¦ä¼ææè¡</label>
-        <textarea id="qBestDate" placeholder="ä¸èµ·å»äºåªéï¼åçäºä»ä¹æè¶£çäºï¼"></textarea>
+        <label>恋爱期间最难忘的一次约会或旅行</label>
+        <textarea id="qBestDate" placeholder="一起去了哪里？发生了什么有趣的事？"></textarea>
       </div>
       <div class="field-group">
-        <label>TA åè¿æè®©ä½ æå¨çä¸ä»¶äº</label>
-        <textarea id="qTouchingMoment" placeholder="é£ä¸ªè®©ä½ è§å¾"è¿è¾å­å°±æ¯TA"çæ¶å»â¦â¦"></textarea>
+        <label>TA 做过最让你感动的一件事</label>
+        <textarea id="qTouchingMoment" placeholder="那个让你觉得"这辈子就是TA"的时刻……"></textarea>
       </div>
       <div class="field-group">
-        <label>ç¨ä¸ä¸ªè¯å½¢å®¹ä½ ä»¬çææ</label>
-        <input type="text" id="qThreeWords" placeholder="ä¾å¦ï¼æ¸©æãæè¶£ãç¸äºæ¶æ">
+        <label>用三个词形容你们的感情</label>
+        <input type="text" id="qThreeWords" placeholder="例如：温暖、有趣、相互扶持">
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title"><span class="num">8</span> å³å® Â· ä¸çä¹çº¦</div>
+      <div class="card-title"><span class="num">8</span> 决定 · 一生之约</div>
       <div class="guided-question">
-        <p class="q-text">ð¡ æ³ä¸æ³ï¼æ±å©çåºæ¯è¿è®°å¾åï¼æ¯ä»ä¹è®©ä½ ä¸å®å³å¿åTAå±åº¦ä¸çï¼</p>
+        <p class="q-text">💡 想一想：求婚的场景还记得吗？是什么让你下定决心和TA共度一生？</p>
       </div>
       <div class="field-group">
-        <label>æ±å©/å³å®ç»å©çæäº</label>
-        <textarea id="qProposal" placeholder="é£ä¸å»æ¯ææ ·çï¼è°åå¼çå£ï¼"></textarea>
+        <label>求婚/决定结婚的故事</label>
+        <textarea id="qProposal" placeholder="那一刻是怎样的？谁先开的口？"></textarea>
       </div>
       <div class="field-group">
-        <label>ä½ æåæ¬¢TAçåªä¸ç¹ï¼</label>
-        <textarea id="qFavoriteTrait" placeholder="é£ä¸ªè®©ä½ æ¯å¤©é½æ´ç±TAççç±â¦â¦"></textarea>
+        <label>你最喜欢TA的哪一点？</label>
+        <textarea id="qFavoriteTrait" placeholder="那个让你每天都更爱TA的理由……"></textarea>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title"><span class="num">9</span> æªæ¥ Â· å±èµ´å±±æµ·</div>
+      <div class="card-title"><span class="num">9</span> 未来 · 共赴山海</div>
       <div class="field-group">
-        <label>å¯¹æªæ¥å©å§»çæ´»çæå¾ææ¿æ</label>
-        <textarea id="qFutureWish" placeholder="ä½ ä»¬å¯¹æªæ¥æä»ä¹å±åçæ¢¦æ³æè®¡åï¼"></textarea>
+        <label>对未来婚姻生活的期待或愿望</label>
+        <textarea id="qFutureWish" placeholder="你们对未来有什么共同的梦想或计划？"></textarea>
       </div>
       <div class="field-group">
-        <label>æ³å¯¹TAè¯´çä¸å¥å¿éè¯</label>
-        <textarea id="qHeartWords" placeholder="å¨å©ç¤¼è¿å¤©ï¼ä½ ææ³å¯¹TAè¯´ä»ä¹ï¼"></textarea>
+        <label>想对TA说的一句心里话</label>
+        <textarea id="qHeartWords" placeholder="在婚礼这天，你最想对TA说什么？"></textarea>
       </div>
     </div>
 
     <div class="btn-row">
-      <button class="btn btn-outline" onclick="prevStep()">â ä¸ä¸æ­¥</button>
-      <button class="btn btn-primary" onclick="generateResult()">â¨ çææçå©ç¤¼æäº</button>
+      <button class="btn btn-outline" onclick="prevStep()">← 上一步</button>
+      <button class="btn btn-primary" onclick="generateResult()">✨ 生成我的婚礼故事</button>
     </div>
   </div>
 
-  <!-- ============ ç»æé¡µ ============ -->
+  <!-- ============ 结果页 ============ -->
   <div class="step-panel" id="resultPage">
     <div class="card" id="resultContent"></div>
     <div class="copy-bar">
-      <button class="btn btn-primary" onclick="copyResult()">ð ä¸é®å¤å¶å¨æ</button>
-      <button class="btn btn-outline" onclick="restart()">éæ°å¡«å</button>
+      <button class="btn btn-primary" onclick="copyResult()">📋 一键复制全文</button>
+      <button class="btn btn-outline" onclick="restart()">重新填写</button>
     </div>
   </div>
 
-  <div class="footer-note">ææä¿¡æ¯ä»ä¿å­å¨æ¨çè®¾å¤ä¸ Â· å¯æ¾å¿å¡«å</div>
+  <div class="footer-note">所有信息仅保存在您的设备上 · 可放心填写</div>
 
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-  // ===== å¯¼èª =====
+  // ===== 导航 =====
   let currentStep = 1;
   const totalSteps = 3;
 
@@ -638,7 +638,7 @@
     }
   }
 
-  // ===== å¤éäº¤äº =====
+  // ===== 多选交互 =====
   document.querySelectorAll('.checklist').forEach(list => {
     list.addEventListener('click', function(e) {
       const item = e.target.closest('.check-item');
@@ -656,12 +656,12 @@
     return Array.from(items).map(i => i.dataset.val);
   }
 
-  // ===== çæç»æ =====
+  // ===== 生成结果 =====
   function generateResult() {
-    const groom = document.getElementById('groomName').value.trim() || 'ï¼æ°éï¼';
-    const bride = document.getElementById('brideName').value.trim() || 'ï¼æ°å¨ï¼';
-    const date = document.getElementById('weddingDate').value || 'ï¼å¾å®ï¼';
-    const venue = document.getElementById('venue').value.trim() || 'ï¼å¾å®ï¼';
+    const groom = document.getElementById('groomName').value.trim() || '（新郎）';
+    const bride = document.getElementById('brideName').value.trim() || '（新娘）';
+    const date = document.getElementById('weddingDate').value || '（待定）';
+    const venue = document.getElementById('venue').value.trim() || '（待定）';
     const style = getSelectedValues('weddingStyle');
     const opening = getSelectedValues('openingItems');
     const core = getSelectedValues('coreItems');
@@ -679,63 +679,63 @@
 
     let html = '';
 
-    // åºæ¬ä¿¡æ¯åº
+    // 基本信息区
     html += '<div class="result-block">';
-    html += '<h3>ð å©ç¤¼åºæ¬ä¿¡æ¯</h3>';
-    html += '<p><strong>æ°éï¼</strong>' + groom + ' &nbsp;|&nbsp; <strong>æ°å¨ï¼</strong>' + bride + '</p>';
-    html += '<p><strong>æ¥æï¼</strong>' + date + ' &nbsp;|&nbsp; <strong>åºå°ï¼</strong>' + venue + '</p>';
+    html += '<h3>💒 婚礼基本信息</h3>';
+    html += '<p><strong>新郎：</strong>' + groom + ' &nbsp;|&nbsp; <strong>新娘：</strong>' + bride + '</p>';
+    html += '<p><strong>日期：</strong>' + date + ' &nbsp;|&nbsp; <strong>场地：</strong>' + venue + '</p>';
     if (style.length) {
-      html += '<p><strong>é£æ ¼ï¼</strong></p><div class="tag-list">' + style.map(s => '<span class="tag">' + s + '</span>').join('') + '</div>';
+      html += '<p><strong>风格：</strong></p><div class="tag-list">' + style.map(s => '<span class="tag">' + s + '</span>').join('') + '</div>';
     }
     html += '</div>';
 
-    // æµç¨åº
-    html += '<div class="result-block"><h3>ð­ ä»ªå¼æµç¨æ¸å</h3>';
+    // 流程区
+    html += '<div class="result-block"><h3>🎭 仪式流程清单</h3>';
     if (opening.length) {
-      html += '<p><strong>å¼åºç¯èï¼</strong></p><div class="tag-list">' + opening.map(s => '<span class="tag">' + s + '</span>').join('') + '</div>';
+      html += '<p><strong>开场环节：</strong></p><div class="tag-list">' + opening.map(s => '<span class="tag">' + s + '</span>').join('') + '</div>';
     }
     if (core.length) {
-      html += '<p style="margin-top:8px;"><strong>æ ¸å¿ç¯èï¼</strong></p><div class="tag-list">' + core.map(s => '<span class="tag">' + s + '</span>').join('') + '</div>';
+      html += '<p style="margin-top:8px;"><strong>核心环节：</strong></p><div class="tag-list">' + core.map(s => '<span class="tag">' + s + '</span>').join('') + '</div>';
     }
     if (special.length) {
-      html += '<p style="margin-top:8px;"><strong>ç¹å«ç¯èï¼</strong></p><div class="tag-list">' + special.map(s => '<span class="tag">' + s + '</span>').join('') + '</div>';
+      html += '<p style="margin-top:8px;"><strong>特别环节：</strong></p><div class="tag-list">' + special.map(s => '<span class="tag">' + s + '</span>').join('') + '</div>';
     }
     if (!opening.length && !core.length && !special.length) {
-      html += '<p style="color:#999;">ï¼æªéæ©ï¼</p>';
+      html += '<p style="color:#999;">（未选择）</p>';
     }
     html += '</div>';
 
-    // ç±ææäºåº
-    html += '<div class="result-block"><h3>ð ' + groom + ' & ' + bride + ' çç±ææäº</h3>';
+    // 爱情故事区
+    html += '<div class="result-block"><h3>💕 ' + groom + ' & ' + bride + ' 的爱情故事</h3>';
 
-    if (howMet) html += '<p><strong>ç¸è¯ï¼</strong>' + howMet + '</p>';
-    if (firstImp) html += '<p><strong>å¿å¨ç¬é´ï¼</strong>' + firstImp + '</p>';
-    if (bestDate) html += '<p><strong>æé¾å¿ççº¦ä¼ï¼</strong>' + bestDate + '</p>';
-    if (touching) html += '<p><strong>ææå¨çç¬é´ï¼</strong>' + touching + '</p>';
-    if (threeWords) html += '<p><strong>ææå³é®è¯ï¼</strong>' + threeWords + '</p>';
-    if (proposal) html += '<p><strong>æ±å©/å³å®ç»å©ï¼</strong>' + proposal + '</p>';
-    if (favorite) html += '<p><strong>æåæ¬¢TAçä¸ç¹ï¼</strong>' + favorite + '</p>';
-    if (future) html += '<p><strong>å¯¹æªæ¥çæå¾ï¼</strong>' + future + '</p>';
-    if (heartWords) html += '<p style="margin-top:8px;padding:10px;background:#fdf5ec;border-radius:10px;"><strong>ð æ³å¯¹TAè¯´çå¿éè¯ï¼</strong><br>' + heartWords + '</p>';
+    if (howMet) html += '<p><strong>相识：</strong>' + howMet + '</p>';
+    if (firstImp) html += '<p><strong>心动瞬间：</strong>' + firstImp + '</p>';
+    if (bestDate) html += '<p><strong>最难忘的约会：</strong>' + bestDate + '</p>';
+    if (touching) html += '<p><strong>最感动的瞬间：</strong>' + touching + '</p>';
+    if (threeWords) html += '<p><strong>感情关键词：</strong>' + threeWords + '</p>';
+    if (proposal) html += '<p><strong>求婚/决定结婚：</strong>' + proposal + '</p>';
+    if (favorite) html += '<p><strong>最喜欢TA的一点：</strong>' + favorite + '</p>';
+    if (future) html += '<p><strong>对未来的期待：</strong>' + future + '</p>';
+    if (heartWords) html += '<p style="margin-top:8px;padding:10px;background:#fdf5ec;border-radius:10px;"><strong>💌 想对TA说的心里话：</strong><br>' + heartWords + '</p>';
     if (!howMet && !firstImp && !bestDate && !touching && !proposal && !favorite && !future && !heartWords) {
-      html += '<p style="color:#999;">ï¼ç±ææäºé¨åå¾å¡«åï¼</p>';
+      html += '<p style="color:#999;">（爱情故事部分待填写）</p>';
     }
     html += '</div>';
 
     document.getElementById('resultContent').innerHTML = html;
     showStep('result');
     currentStep = 'result';
-    updateProgress(4); // å¨é¨å®æ
+    updateProgress(4); // 全部完成
   }
 
-  // ===== å¤å¶ =====
+  // ===== 复制 =====
   function copyResult() {
-    // æåçº¯ææ¬
+    // 提取纯文本
     const container = document.getElementById('resultContent');
     const text = container.innerText;
 
     if (navigator.clipboard) {
-      navigator.clipboard.writeText(text).then(() => showToast('å·²å¤å¶å°åªè´´æ¿'));
+      navigator.clipboard.writeText(text).then(() => showToast('已复制到剪贴板'));
     } else {
       const ta = document.createElement('textarea');
       ta.value = text;
@@ -745,7 +745,7 @@
       ta.select();
       document.execCommand('copy');
       document.body.removeChild(ta);
-      showToast('å·²å¤å¶å°åªè´´æ¿');
+      showToast('已复制到剪贴板');
     }
   }
 
